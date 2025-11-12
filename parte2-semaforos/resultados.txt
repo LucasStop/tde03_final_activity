@@ -62,3 +62,73 @@ Perdidos: 1.486.858 (74,34%)
 Tempo:    0,036 segundos
 CONDIÇÃO DE CORRIDA DETECTADA!
 Incrementos foram perdidos devido à falta de sincronização.
+
+EXECUÇÃO COM SEMÁFORO 01
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+Semáforo: binário (1 permissão) em modo FIFO
+
+RESULTADOS 01
+Esperado: 2.000.000
+Obtido:   2.000.000
+Diferença: 0
+Tempo:    9,583 segundos
+SUCESSO! Resultado correto.
+O semáforo garantiu exclusão mútua e visibilidade.
+
+EXECUÇÃO COM SEMÁFORO 02
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+Semáforo: binário (1 permissão) em modo FIFO
+
+RESULTADOS 02
+Esperado: 2.000.000
+Obtido:   2.000.000
+Diferença: 0
+Tempo:    10,198 segundos
+SUCESSO! Resultado correto.
+O semáforo garantiu exclusão mútua e visibilidade.
+
+EXECUÇÃO COM SEMÁFORO 03
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+Semáforo: binário (1 permissão) em modo FIFO
+
+RESULTADOS 03
+Esperado: 2.000.000
+Obtido:   2.000.000
+Diferença: 0
+Tempo:    10,098 segundos
+SUCESSO! Resultado correto.
+O semáforo garantiu exclusão mútua e visibilidade.
+
+EXECUÇÃO COM SEMÁFORO 04
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+Semáforo: binário (1 permissão) em modo FIFO
+
+RESULTADOS 04
+Esperado: 2.000.000
+Obtido:   2.000.000
+Diferença: 0
+Tempo:    9,404 segundos
+SUCESSO! Resultado correto.
+O semáforo garantiu exclusão mútua e visibilidade.
+
+EXECUÇÃO COM SEMÁFORO 05
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+Semáforo: binário (1 permissão) em modo FIFO
+
+RESULTADOS 05
+Esperado: 2.000.000
+Obtido:   2.000.000
+Diferença: 0
+Tempo:    10,715 segundos
+SUCESSO! Resultado correto.
+O semáforo garantiu exclusão mútua e visibilidade.
