@@ -1,0 +1,64 @@
+EXECUÇÃO SEM SINCRONIZAÇÃO 01
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+
+RESULTADOS 01
+Esperado: 2.000.000
+Obtido:   492.328
+Perdidos: 1.507.672 (75,38%)
+Tempo:    0,044 segundos
+CONDIÇÃO DE CORRIDA DETECTADA!
+Incrementos foram perdidos devido à falta de sincronização.
+
+EXECUÇÃO SEM SINCRONIZAÇÃO 02
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+
+RESULTADOS 02
+Esperado: 2.000.000
+Obtido:   526.490
+Perdidos: 1.473.510 (73,68%)
+Tempo:    0,027 segundos
+CONDIÇÃO DE CORRIDA DETECTADA!
+Incrementos foram perdidos devido à falta de sincronização.
+
+EXECUÇÃO SEM SINCRONIZAÇÃO 03
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+
+RESULTADOS 03
+Esperado: 2.000.000
+Obtido:   956.222
+Perdidos: 1.043.778 (52,19%)
+Tempo:    0,038 segundos
+CONDIÇÃO DE CORRIDA DETECTADA!
+Incrementos foram perdidos devido à falta de sincronização.
+
+EXECUÇÃO SEM SINCRONIZAÇÃO 04
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+
+RESULTADOS 04
+Esperado: 2.000.000
+Obtido:   461.008
+Perdidos: 1.538.992 (76,95%)
+Tempo:    0,037 segundos
+CONDIÇÃO DE CORRIDA DETECTADA!
+Incrementos foram perdidos devido à falta de sincronização.
+
+EXECUÇÃO SEM SINCRONIZAÇÃO 05
+Threads: 8
+Incrementos por thread: 250000
+Valor esperado: 2000000
+
+RESULTADOS 05
+Esperado: 2.000.000
+Obtido:   513.142
+Perdidos: 1.486.858 (74,34%)
+Tempo:    0,036 segundos
+CONDIÇÃO DE CORRIDA DETECTADA!
+Incrementos foram perdidos devido à falta de sincronização.
