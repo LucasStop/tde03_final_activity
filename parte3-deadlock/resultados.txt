@@ -1,0 +1,20 @@
+DEMONSTRAÇÃO DE DEADLOCK (SEM CORREÇÃO)
+Iniciando duas threads com ordem inversa de aquisição de locks...
+
+[T1] Adquiriu LOCK_A
+[T1] Aguardando para adquirir LOCK_B...
+[T2] Adquiriu LOCK_B
+[T2] Aguardando para adquirir LOCK_A...
+
+DEADLOCK DETECTADO!
+As threads estão travadas esperando uma pela outra.
+
+Estado das threads:
+  - T1: possui LOCK_A, aguardando LOCK_B
+  - T2: possui LOCK_B, aguardando LOCK_A
+
+Espera circular detectada! Nenhuma progredirá.
+
+Threads ainda em execução:
+  - Thread-1: BLOQUEADA
+  - Thread-2: BLOQUEADA
