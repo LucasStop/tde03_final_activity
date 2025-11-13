@@ -18,3 +18,32 @@ Espera circular detectada! Nenhuma progredirá.
 Threads ainda em execução:
   - Thread-1: BLOQUEADA
   - Thread-2: BLOQUEADA
+
+DEMONSTRAÇÃO DE DEADLOCK (COM CORREÇÃO)
+Estratégia: Hierarquia de Recursos (ordem global)
+Regra: SEMPRE adquirir LOCK_A antes de LOCK_B
+
+[T1] Adquiriu LOCK_A
+[T1] Adquiriu LOCK_B
+[T1] Executando seção crítica...
+[T1] Concluiu com sucesso!
+[T1] Liberou LOCK_B
+[T1] Liberou LOCK_A
+[T2] Adquiriu LOCK_A
+[T2] Adquiriu LOCK_B
+[T2] Executando seção crítica...
+[T2] Concluiu com sucesso!
+[T2] Liberou LOCK_B
+[T2] Liberou LOCK_A
+
+Ambas as threads concluíram.
+Tempo total: 305ms
+
+ANÁLISE DA CORREÇÃO
+Ordem global imposta: A sempre antes de B
+Espera circular eliminada
+Deadlock impossível com esta estratégia
+
+Estado final das threads:
+  ? Thread-1: Finalizada
+  ? Thread-2: Finalizada
