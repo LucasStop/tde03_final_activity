@@ -1,0 +1,139 @@
+================================================================================
+JANTAR DOS FILÓSOFOS - PROTOCOLO INGÊNUO (COM DEADLOCK)
+================================================================================
+
+DESCRIÇÃO:
+  Protocolo simples onde cada filósofo pega primeiro o garfo da esquerda,
+  depois o da direita. Este protocolo CAUSA DEADLOCK quando todos os filósofos
+  pegam simultaneamente o garfo esquerdo e aguardam o direito.
+
+================================================================================
+
+CONFIGURAÇÃO:
+  N = 5 filósofos (numerados de 0 a 4)
+  5 garfos (numerados de 0 a 4)
+  
+  Disposição na mesa circular:
+                    Filósofo 0
+                   /          \
+            Garfo 0            Garfo 4
+               /                  \
+        Filósofo 1              Filósofo 4
+          |                          |
+       Garfo 1                    Garfo 3
+          |                          |
+        Filósofo 2 — Garfo 2 — Filósofo 3
+
+  Para cada filósofo i:
+    garfo_esquerda(i) = i
+    garfo_direita(i) = (i + 1) mod N
+
+================================================================================
+
+ESTADOS POSSÍVEIS:
+  - PENSANDO: filósofo está pensando, não precisa de garfos
+  - COM_FOME: filósofo quer comer, tentando adquirir garfos
+  - COMENDO: filósofo possui ambos garfos e está comendo
+
+================================================================================
+
+ESTRUTURAS DE DADOS:
+  Garfo[0..N-1]: semáforo binário (mutex) para cada garfo
+  Estado[0..N-1]: estado atual de cada filósofo
+
+================================================================================
+
+PSEUDOCÓDIGO - PROTOCOLO INGÊNUO:
+
+Para cada Filósofo i (de 0 a N-1) em paralelo:
+  
+  Loop infinito:
+    
+    // FASE 1: PENSAR
+    Estado[i] ← PENSANDO
+    Exibir("Filósofo", i, "está pensando")
+    Pensar()  // Simula tempo pensando (ex: sleep aleatório)
+    
+    // FASE 2: FICAR COM FOME
+    Estado[i] ← COM_FOME
+    Exibir("Filósofo", i, "está com fome")
+    
+    // FASE 3: TENTAR COMER
+    // PROBLEMA: Todos pegam esquerda primeiro!
+    esquerda ← i
+    direita ← (i + 1) mod N
+    
+    Exibir("Filósofo", i, "tentando pegar garfo", esquerda)
+    Adquirir(Garfo[esquerda])  // BLOQUEIA até garfo estar livre
+    Exibir("Filósofo", i, "pegou garfo", esquerda)
+    
+    Exibir("Filósofo", i, "tentando pegar garfo", direita)
+    Adquirir(Garfo[direita])   // BLOQUEIA até garfo estar livre
+    Exibir("Filósofo", i, "pegou garfo", direita)
+    
+    // FASE 4: COMER (se conseguiu ambos garfos)
+    Estado[i] ← COMENDO
+    Exibir("Filósofo", i, "está comendo")
+    Comer()  // Simula tempo comendo
+    
+    // FASE 5: LIBERAR GARFOS
+    Liberar(Garfo[direita])
+    Exibir("Filósofo", i, "liberou garfo", direita)
+    
+    Liberar(Garfo[esquerda])
+    Exibir("Filósofo", i, "liberou garfo", esquerda)
+
+  Fim Loop
+
+Fim Para
+
+================================================================================
+
+CENÁRIO DE DEADLOCK:
+
+Tempo | F0 | F1 | F2 | F3 | F4 | Situação
+------|----|----|----|----|----|-----------------------------------------
+t0    | Pega G0 | Pega G1 | Pega G2 | Pega G3 | Pega G4 | Todos pegaram esquerda
+t1    | Aguarda G1 | Aguarda G2 | Aguarda G3 | Aguarda G4 | Aguarda G0 | DEADLOCK!
+
+Grafo de espera circular:
+  F0 → G1 → F1 → G2 → F2 → G3 → F3 → G4 → F4 → G0 → F0
+                               ↑_______________|
+                                   (CICLO!)
+
+Resultado: NINGUÉM PROGRIDE! Sistema travado indefinidamente.
+
+================================================================================
+
+ANÁLISE DAS CONDIÇÕES DE COFFMAN (4/4 PRESENTES):
+
+1. EXCLUSÃO MÚTUA:
+   Cada garfo pode ser usado por apenas 1 filósofo por vez
+   → Semáforo binário garante exclusão
+
+2. MANTER-E-ESPERAR (Hold and Wait):
+   Filósofo segura garfo esquerdo enquanto aguarda direito
+   → Mantém recurso adquirido enquanto espera outro
+
+3. NÃO PREEMPÇÃO:
+   Garfo não pode ser tirado à força de um filósofo
+   → Apenas liberado voluntariamente após comer
+
+4. ESPERA CIRCULAR:
+   F0 espera F1, F1 espera F2, ..., F4 espera F0
+   → Ciclo completo de dependências
+
+CONCLUSÃO: 4/4 condições satisfeitas → DEADLOCK INEVITÁVEL!
+
+================================================================================
+
+LIMITAÇÕES DESTE PROTOCOLO:
+
+❌ DEADLOCK: Se todos pegarem garfo esquerdo simultaneamente
+❌ INANIÇÃO (Starvation): Filósofo pode nunca conseguir comer se vizinhos
+   comerem alternadamente
+❌ FALTA DE PROGRESSO: Sistema pode travar completamente
+
+NECESSIDADE: Estratégia que quebre pelo menos 1 das 4 condições de Coffman
+
+================================================================================
